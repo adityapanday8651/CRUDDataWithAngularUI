@@ -1,10 +1,14 @@
 /* Assuming you are using Bootstrap, so adding additional styles */
 .is-dirty {
-    border-color: red;
-  }
-  
-  /* Optionally, if you want a different style when invalid */
-  .is-invalid {
-    border-color: red;
-  }
-  
+  border-color: red;
+}
+
+/* Optionally, if you want a different style when invalid */
+.is-invalid {
+  border-color: red;
+}
+
+.fafaIconColor {
+  background: darkorange;
+  font-size: 10px;
+}

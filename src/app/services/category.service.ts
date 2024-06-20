@@ -27,6 +27,27 @@ export class CategoryService {
       );
   }
 
+  getCategoryByIdAsync(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/api/Category/GetCategoryByIdAsync?id=${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  updateCategoryAsync(id: number, categoryDto: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/api/Category/UpdateCategoryAsync?id=${id}`, categoryDto)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  deleteCategoryAsync(id: any): Observable<any> {
+    console.log("This is ID For Delete : ", id)
+    return this.http.delete(`${this.apiUrl}/api/Category/DeleteCategoryAsync?id=${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
   
 
    // Handle errors

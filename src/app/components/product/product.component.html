@@ -1,1 +1,36 @@
-<p>product works!</p>
+<h1>Product Forms</h1>
+
+<div class="row">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name"
+        [ngClass]="{'is-invalid': isNameInvalid()}">
+      <div *ngIf="isNameInvalid()" class="text-danger">
+        <div *ngIf="productForm.get('name').errors?.required">Name is required.</div>
+        <div *ngIf="productForm.get('name').errors?.minlength">Name must be at least 3 characters long.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input type="number" class="form-control" id="price" formControlName="price"
+        [ngClass]="{'is-invalid': isPriceInvalid()}">
+      <div *ngIf="isPriceInvalid()" class="text-danger">
+        <div *ngIf="productForm.get('price').errors?.required">Price is required.</div>
+        <div *ngIf="productForm.get('price').errors?.min">Price must be a positive number.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-control" id="category" formControlName="categoryId">
+        <option *ngFor="let category of lstAllCategories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Submit</button>
+  </form>
+
+</div>

@@ -33,6 +33,14 @@ export class ProductService {
         catchError(this.handleError)
       );
   }
+
+
+  getAllCategoriesAsync(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/api/Category/GetAllCategoriesAsync`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
   
 
    // Handle errors
