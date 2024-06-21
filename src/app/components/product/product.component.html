@@ -1,36 +1,134 @@
-<h1>Product Forms</h1>
+<strong>Product Table</strong>
+<div class="row align-items-center">
+  <div class="col-6 col-md-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Category Name</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of lstAllProducts">
+          <td>{{product.name}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.categoryName}}</td>
+          <td>
+            <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addProductModal"
+              title="Save" (click)="open()">
+              <i class="fa fa-plus"></i>
+            </button>
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editProductModal" title="Edit"
+              (click)="editOpen(product.id)">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" title="Delete" (click)="deleteProducrAsync(product.id)">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
 
-<div class="row">
-  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" formControlName="name"
-        [ngClass]="{'is-invalid': isNameInvalid()}">
-      <div *ngIf="isNameInvalid()" class="text-danger">
-        <div *ngIf="productForm.get('name').errors?.required">Name is required.</div>
-        <div *ngIf="productForm.get('name').errors?.minlength">Name must be at least 3 characters long.</div>
+
+          <!-- <form [formGroup]="productForm" (ngSubmit)="addProductAsync()"> -->
+          <form [formGroup]="productForm" (ngSubmit)="addProductAsync()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" formControlName="name"
+                [ngClass]="{'is-invalid': isNameInvalid()}">
+              <div *ngIf="isNameInvalid()" class="text-danger">
+                <div *ngIf="productForm.get('name').errors?.required">Name is required.</div>
+                <div *ngIf="productForm.get('name').errors?.minlength">Name must be at least 3 characters long.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input type="number" class="form-control" id="price" formControlName="price"
+                [ngClass]="{'is-invalid': isPriceInvalid()}">
+              <div *ngIf="isPriceInvalid()" class="text-danger">
+                <div *ngIf="productForm.get('price').errors?.required">Price is required.</div>
+                <div *ngIf="productForm.get('price').errors?.min">Price must be a positive number.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <select class="form-control" id="category" formControlName="categoryId">
+                <option *ngFor="let category of lstAllCategories" [value]="category.id">{{ category.name }}</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Add</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="mb-3">
-      <label for="price" class="form-label">Price</label>
-      <input type="number" class="form-control" id="price" formControlName="price"
-        [ngClass]="{'is-invalid': isPriceInvalid()}">
-      <div *ngIf="isPriceInvalid()" class="text-danger">
-        <div *ngIf="productForm.get('price').errors?.required">Price is required.</div>
-        <div *ngIf="productForm.get('price').errors?.min">Price must be a positive number.</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <form [formGroup]="productForm" (ngSubmit)="updateProductAsync()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" formControlName="name"
+                [ngClass]="{'is-invalid': isNameInvalid()}">
+              <div *ngIf="isNameInvalid()" class="text-danger">
+                <div *ngIf="productForm.get('name').errors?.required">Name is required.</div>
+                <div *ngIf="productForm.get('name').errors?.minlength">Name must be at least 3 characters long.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input type="number" class="form-control" id="price" formControlName="price"
+                [ngClass]="{'is-invalid': isPriceInvalid()}">
+              <div *ngIf="isPriceInvalid()" class="text-danger">
+                <div *ngIf="productForm.get('price').errors?.required">Price is required.</div>
+                <div *ngIf="productForm.get('price').errors?.min">Price must be a positive number.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <select class="form-control" id="category" formControlName="categoryId">
+                <option *ngFor="let category of lstAllCategories" [value]="category.id">{{ category.name }}</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Update</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
-
-    <div class="mb-3">
-      <label for="category" class="form-label">Category</label>
-      <select class="form-control" id="category" formControlName="categoryId">
-        <option *ngFor="let category of lstAllCategories" [value]="category.id">{{ category.name }}</option>
-      </select>
-    </div>
-
-
-    <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Submit</button>
-  </form>
-
+  </div>
 </div>
