@@ -45,6 +45,10 @@ export class CategoryComponent implements OnInit {
     return this.categoryForm.get('name');
   }
 
+  open(){
+    this.categoryForm.reset();
+  }
+
   public async editOpen(id: any) {
     await this.categoryService.getCategoryByIdAsync(id).subscribe(async response => {
       await this.patchValueForUpdateModelAsync(response);

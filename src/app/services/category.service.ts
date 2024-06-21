@@ -42,7 +42,6 @@ export class CategoryService {
   }
 
   deleteCategoryAsync(id: any): Observable<any> {
-    console.log("This is ID For Delete : ", id)
     return this.http.delete(`${this.apiUrl}/api/Category/DeleteCategoryAsync?id=${id}`)
       .pipe(
         catchError(this.handleError)

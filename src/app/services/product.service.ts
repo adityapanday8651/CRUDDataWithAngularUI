@@ -26,14 +26,27 @@ export class ProductService {
         catchError(this.handleError)
       );
   }
-   // GET request to get data by ID
-   getProductByIdAsync(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/Products/${id}`)
+
+  getProductByIdAsync(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/api/Products/GetProductByIdAsync?id=${id}`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
+  deleteProductAsync(id: any): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/api/Products/DeleteProductAsync?id=${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  updateProductAsync(id: number, productDto: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/api/Products/UpdateProductAsync?id=${id}`, productDto)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   getAllCategoriesAsync(): Observable<any> {
     return this.http.get(`${this.apiUrl}/api/Category/GetAllCategoriesAsync`)
@@ -41,8 +54,6 @@ export class ProductService {
         catchError(this.handleError)
       );
   }
-  
-
    // Handle errors
    private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
