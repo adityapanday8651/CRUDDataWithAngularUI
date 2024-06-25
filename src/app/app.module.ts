@@ -13,6 +13,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ProtectedComponent } from './components/protected/protected.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 export function tokenGetter() {
@@ -28,7 +30,9 @@ export function tokenGetter() {
     HomeComponent,
     HeaderComponent,
     LoginComponent,
-    ProtectedComponent
+    ProtectedComponent,
+    RegisterComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+<div class="login-page">
+  <div class="form">
+    <form [formGroup]="registerForm" class="login-form">
+      <input type="text" class="form-control" id="username" formControlName="username"
+        [ngClass]="{'is-invalid': isUserNameInvalid()}" placeholder="username">
+      <div *ngIf="isUserNameInvalid()" class="text-danger validationMessage">
+        <div *ngIf="registerForm.get('username').errors?.required">User Name is required.</div>
+        <div *ngIf="registerForm.get('username').errors?.minlength">User Name must be at least 6 special and
+          characters long.
+        </div>
+      </div>
+
+
+      <input type="email" class="form-control" id="email" formControlName="email"
+        [ngClass]="{'is-invalid': isEmailInvalid()}" placeholder="email">
+      <div *ngIf="isEmailInvalid()" class="text-danger validationMessage">
+        <div *ngIf="registerForm.get('email').errors?.required">User Name is required.</div>
+      </div>
+      
+
+
+      <input type="password" class="form-control" id="password" formControlName="password"
+        [ngClass]="{'is-invalid': isPasswordInvalid()}" placeholder="password">
+      <div *ngIf="isPasswordInvalid()" class="text-danger validationMessage">
+        <div *ngIf="registerForm.get('password').errors?.required">Password is required.</div>
+        <div *ngIf="registerForm.get('password').errors?.minlength">Password must be at least 3 characters
+          long.
+        </div>
+      </div>
+    </form>
+    <button (click)="onRegister()" class="btn btn-primary">Register</button>
+    <!-- <button type="button" class="btn btn-primary" (click)="openModal()">Open Registration Modal</button>
+    <app-modal></app-modal>
+  </div> -->
+</div>
