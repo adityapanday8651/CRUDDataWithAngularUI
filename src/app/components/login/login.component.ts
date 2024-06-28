@@ -67,11 +67,13 @@ export class LoginComponent implements OnInit {
   onRegister() {
     if (this.registerForm.valid) {
       console.log(this.registerForm.value);
+      
+    this.registerForm.reset();
       // Handle the registration logic here, e.g., call an API
     }
   }
 
   openModal(): void {
     this.modal.open();
-  }
+     }
 }

@@ -26,8 +26,9 @@
       </div>
     </form>
     <button (click)="onLogin()">login</button>
-    <!-- <button type="button" class="btn btn-primary" (click)="openModal()">Register</button> -->
-    <button class="message validationMessage createAccount"  (click)="openModal()">Create an account</button>
+    <div class="createAccountButton">
+      <button  (click)="openModal()">Create an account</button>
+      </div>
     <app-modal></app-modal>
   </div>
 </div>
