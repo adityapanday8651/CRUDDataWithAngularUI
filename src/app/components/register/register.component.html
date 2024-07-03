@@ -1,4 +1,4 @@
-<div class="login-page">
+<!-- <div class="login-page">
   <div class="form">
     <form [formGroup]="registerForm" class="login-form">
       <input type="text" class="form-control inputFields" id="username" formControlName="username"
@@ -29,4 +29,37 @@
       </div>
     </form>
     <button (click)="onRegister()" class="btn btn-primary registerButton" [disabled]="!registerForm.valid">Register</button>
+</div> -->
+
+
+
+
+<div class="login-page">
+  <div class="form">
+    <form [formGroup]="registerForm" class="login-form">
+      <input type="text" class="form-control inputFields" id="username" formControlName="username"
+        [ngClass]="{'is-invalid': isFieldInvalid('username')}" placeholder="Username">
+      <div *ngIf="isFieldInvalid('username')" class="text-danger validationMessage">
+        <div *ngIf="registerForm.get('username').errors?.required">Username is required.</div>
+        <div *ngIf="registerForm.get('username').errors?.minlength">Username must be at least 6 characters long.</div>
+      </div>
+
+      <input type="email" class="form-control inputFields" id="email" formControlName="email"
+        [ngClass]="{'is-invalid': isFieldInvalid('email')}" placeholder="Email ID">
+      <div *ngIf="isFieldInvalid('email')" class="text-danger validationMessage">
+        <div *ngIf="registerForm.get('email').errors?.required">Email ID is required.</div>
+        <div *ngIf="registerForm.get('email').errors?.email">Invalid email format.</div>
+      </div>
+
+      <input type="password" class="form-control inputFields" id="password" formControlName="password"
+        [ngClass]="{'is-invalid': isFieldInvalid('password')}" placeholder="Password">
+      <div *ngIf="isFieldInvalid('password')" class="text-danger validationMessage">
+        <div *ngIf="registerForm.get('password').errors?.required">Password is required.</div>
+        <div *ngIf="registerForm.get('password').errors?.minlength">Password must be at least 3 characters long.</div>
+      </div>
+
+      <button type="button" (click)="onRegister()" class="btn btn-primary registerButton"
+        [disabled]="!registerForm.valid">Register</button>
+    </form>
+  </div>
 </div>

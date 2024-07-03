@@ -8,9 +8,15 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'ProductCategory';
+  isSidebarOpen: boolean = false;
   constructor(public authService: AuthService) {}
 
   onLogout() {
     this.authService.logoutAPICalls();
   }
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
 }

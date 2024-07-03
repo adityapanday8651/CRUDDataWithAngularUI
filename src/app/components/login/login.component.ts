@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalComponent } from '../modal/modal.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -19,14 +20,8 @@ export class LoginComponent implements OnInit {
     public authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-  ) {
-    // this.loginForm = this.fb.group({
-    //   username: ['', [Validators.required]],
-    //   password: ['', [Validators.required, Validators.minLength(6)]]
-    // });
-
-
-  }
+  ) {  }
+  
   ngOnInit(): void {
    this.loginReactiveForms();
   }
@@ -54,11 +49,25 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         () => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Login Successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          
           this.router.navigate(['/home']);
         },
         error => {
           console.error('Login failed', error);
-          alert("User Unauthorized");
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "User Unauthorized",
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       );
     }

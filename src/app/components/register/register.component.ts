@@ -34,6 +34,10 @@ export class RegisterComponent {
     }
   }
 
+  isFieldInvalid(field: string) {
+    return this.registerForm.get(field).invalid && this.registerForm.get(field).touched;
+  }
+
 
   isUserNameInvalid(): boolean {
     return this.isControlInvalid('username');

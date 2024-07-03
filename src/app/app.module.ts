@@ -32,7 +32,7 @@ export function tokenGetter() {
     LoginComponent,
     ProtectedComponent,
     RegisterComponent,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
