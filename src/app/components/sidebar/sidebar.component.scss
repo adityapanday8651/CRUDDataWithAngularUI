@@ -1,0 +1,35 @@
+/* Container for the navigation links */
+mat-nav-list {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff; /* Change to your preferred background color */
+  }
+  
+  /* Style for each list item */
+  mat-list-item {
+    width: 100%;
+    padding: 15px 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Style for the links */
+  mat-list-item a {
+    text-decoration: none;
+    color: #333333; /* Change to your preferred text color */
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Change the color on hover */
+  mat-list-item a:hover {
+    background-color: #f0f0f0; /* Change to your preferred hover background color */
+  }
+  
+  /* Selected link style */
+  mat-list-item a.router-link-active {
+    background-color: #e0e0e0; /* Change to your preferred active link background color */
+    font-weight: bold;
+  }
+  

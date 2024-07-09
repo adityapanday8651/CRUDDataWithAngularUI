@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
   @ViewChild(ModalComponent) modal: ModalComponent | any;
   public loginForm: FormGroup | any;
-  public registerForm: FormGroup | any;
 
   constructor(
     public authService: AuthService,
@@ -56,7 +55,7 @@ export class LoginComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          
+          this.loginForm.reset();
           this.router.navigate(['/home']);
         },
         error => {
@@ -70,15 +69,6 @@ export class LoginComponent implements OnInit {
           });
         }
       );
-    }
-  }
-
-  onRegister() {
-    if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-      
-    this.registerForm.reset();
-      // Handle the registration logic here, e.g., call an API
     }
   }
 

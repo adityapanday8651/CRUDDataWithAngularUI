@@ -58,6 +58,12 @@
         <div *ngIf="registerForm.get('password').errors?.minlength">Password must be at least 3 characters long.</div>
       </div>
 
+      <div class="mb-3">
+        <select class="form-control" id="roleId" formControlName="roleId">
+          <option *ngFor="let role of lstAllRoles" [value]="role.id">{{ role.roleName }}</option>
+        </select>
+      </div>
+
       <button type="button" (click)="onRegister()" class="btn btn-primary registerButton"
         [disabled]="!registerForm.valid">Register</button>
     </form>
