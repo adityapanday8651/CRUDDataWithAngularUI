@@ -1,0 +1,21 @@
+/* Container for the whole app */
+.example-container {
+    height: 100vh;
+    display: flex;
+  }
+  
+  /* Sidebar style */
+  .example-sidenav {
+    width: 250px;
+    background-color: #fafafa; /* Change to your preferred sidebar background color */
+    border-right: 1px solid #e0e0e0;
+  }
+  
+  /* Content style */
+  mat-drawer-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f5f5; /* Change to your preferred content background color */
+    overflow-y: auto;
+  }
+  

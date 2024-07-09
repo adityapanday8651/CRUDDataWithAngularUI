@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,11 +7,14 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
+  @Output() toggleSidenav = new EventEmitter<void>();
   constructor(public authService: AuthService) {}
 
   onLogout() {
     this.authService.logoutAPICalls();
   }
 
+  onToggleSidenav() {
+    this.toggleSidenav.emit();
+  }
 }
