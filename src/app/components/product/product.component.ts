@@ -11,8 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class ProductComponent implements OnInit {
   productForm: FormGroup | any;
-  lstAllCategories: any;
-  lstAllProducts: any;
+  lstAllCategories: any[] = [];
+  lstAllProducts: any[] = [];
   checkOperationStatus: boolean | any;
   updateProductModel:any;
 

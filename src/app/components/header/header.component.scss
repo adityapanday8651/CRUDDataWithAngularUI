@@ -1,45 +1,103 @@
-body {
-    font-family: 'Roboto', sans-serif;
-  }
-  .navbar {
-    background: linear-gradient(135deg, #6f42c1, #007bff);
-    padding: 1em;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .navbar-nav .nav-link {
-    color: #ffffff;
-    margin-right: 1em;
-    transition: color 0.3s;
-  }
-  .navbar-nav .nav-link:hover {
-    color: #d4d4d4;
-  }
-  .navbar-nav .nav-link.active {
-    font-weight: 500;
-  }
-  .navbar .container-fluid {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .navbar-collapse {
-    flex-grow: 0;
-  }
-  .navbar button, .navbar a[routerLink="/login"] {
-    background-color: #ffffff;
-    border: none;
-    color: #007bff;
-    padding: 0.5em 1em;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  .navbar button:hover, .navbar a[routerLink="/login"]:hover {
-    background-color: #007bff;
-    color: #ffffff;
-  }
-  .navbar a[routerLink="/login"] {
-    text-decoration: none;
-    display: inline-block;
-  }
+// body {
+//     font-family: 'Roboto', sans-serif;
+//   }
+//   .navbar {
+//     background: linear-gradient(135deg, #6f42c1, #007bff);
+//     padding: 1em;
+//     border-radius: 8px;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//   }
+//   .navbar-nav .nav-link {
+//     color: #ffffff;
+//     margin-right: 1em;
+//     transition: color 0.3s;
+//   }
+//   .navbar-nav .nav-link:hover {
+//     color: #d4d4d4;
+//   }
+//   .navbar-nav .nav-link.active {
+//     font-weight: 500;
+//   }
+//   .navbar .container-fluid {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//   }
+//   .navbar-collapse {
+//     flex-grow: 0;
+//   }
+//   .navbar button, .navbar a[routerLink="/login"] {
+//     background-color: #ffffff;
+//     border: none;
+//     color: #007bff;
+//     padding: 0.5em 1em;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     transition: background-color 0.3s, color 0.3s;
+//   }
+//   .navbar button:hover, .navbar a[routerLink="/login"]:hover {
+//     background-color: #007bff;
+//     color: #ffffff;
+//   }
+//   .navbar a[routerLink="/login"] {
+//     text-decoration: none;
+//     display: inline-block;
+//   }
+
+
+
+/* Styling for the navigation bar */
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar-links li {
+  margin-right: 1rem;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar-links a.active {
+  border-bottom: 2px solid white;
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.auth-buttons button,
+.auth-buttons a {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.auth-buttons button:hover,
+.auth-buttons a:hover {
+  background-color: #0056b3;
+}

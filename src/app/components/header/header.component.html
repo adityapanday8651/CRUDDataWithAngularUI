@@ -1,12 +1,21 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="toggleSidenav.emit()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My Application</span>
-  <span class="spacer"></span>
-  <button mat-button *ngIf="authService.isAuthenticated()" (click)="onLogout()">Logout</button>
-  <a mat-button routerLink="/login" *ngIf="!authService.isAuthenticated()">Login</a>
-</mat-toolbar>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/product">Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category">Category</a>
+        </li>
+      </ul>
 
-
+      <button class="btn btn-info" *ngIf="authService.isAuthenticated()" (click)="onLogout()">Logout</button>
+      <a routerLink="/login" *ngIf="!authService.isAuthenticated()"></a>
+    </div>
+  </div>
+</nav>

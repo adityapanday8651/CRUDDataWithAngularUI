@@ -12,7 +12,7 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getAllCategoriesAsync(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/Category/GetAllCategoriesAsync`)
+    return this.http.get<any[]>(`${this.apiUrl}/api/Category/GetAllCategoriesAsync`)
       .pipe(
         catchError(this.handleError)
       );
