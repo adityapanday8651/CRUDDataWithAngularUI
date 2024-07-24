@@ -1,45 +1,18 @@
-body {
-    font-family: 'Roboto', sans-serif;
-  }
-  .navbar {
-    background: linear-gradient(135deg, #6f42c1, #007bff);
-    padding: 1em;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .navbar-nav .nav-link {
-    color: #ffffff;
-    margin-right: 1em;
-    transition: color 0.3s;
-  }
-  .navbar-nav .nav-link:hover {
-    color: #d4d4d4;
-  }
-  .navbar-nav .nav-link.active {
-    font-weight: 500;
-  }
-  .navbar .container-fluid {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .navbar-collapse {
-    flex-grow: 0;
-  }
-  .navbar button, .navbar a[routerLink="/login"] {
-    background-color: #ffffff;
-    border: none;
-    color: #007bff;
-    padding: 0.5em 1em;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  .navbar button:hover, .navbar a[routerLink="/login"]:hover {
-    background-color: #007bff;
-    color: #ffffff;
-  }
-  .navbar a[routerLink="/login"] {
-    text-decoration: none;
-    display: inline-block;
-  }
+.custom-navbar {
+  background-color: #006B3C; /* Cadmium Green */
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link,
+.custom-navbar .navbar-toggler-icon {
+  color: #fff; /* White text for better contrast */
+}
+
+.custom-navbar .nav-link.active {
+  color: #FFD700; /* Optional: Highlight active link with a gold color */
+}
+
+.btn-outline-info,
+.btn-outline-primary {
+  border-color: #FFD700;
+}

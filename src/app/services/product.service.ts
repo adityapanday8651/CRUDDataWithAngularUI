@@ -12,7 +12,7 @@ export class ProductService {
 
 
   getAllProductsAsync(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/Products/GetAllProductsAsync`)
+    return this.http.get<any[]>(`${this.apiUrl}/api/Products/GetAllProductsAsync`)
       .pipe(
         catchError(this.handleError)
       );
@@ -49,7 +49,7 @@ export class ProductService {
   }
 
   getAllCategoriesAsync(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/Category/GetAllCategoriesAsync`)
+    return this.http.get<any[]>(`${this.apiUrl}/api/Category/GetAllCategoriesAsync`)
       .pipe(
         catchError(this.handleError)
       );

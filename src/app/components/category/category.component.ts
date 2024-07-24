@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 export class CategoryComponent implements OnInit {
 
   public categoryForm: FormGroup | any;
-  public lstAllCategories: any;
+  public lstAllCategories: any[] = [];
 
   constructor(
     private categoryService: CategoryService,
@@ -33,7 +34,8 @@ export class CategoryComponent implements OnInit {
 
   public async getAllCategoriesAsync() {
     await this.categoryService.getAllCategoriesAsync().subscribe(response => {
-      this.lstAllCategories = response.data;
+      this.lstAllCategories = response.data.categories;
+      console.log("lstAllCategories " , this.lstAllCategories);
     },
       error => {
         console.error('Error fetching categories:', error);
