@@ -14,9 +14,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let product of lstAllProducts">
-              <td>{{product.name}}</td>
-              <td>{{product.price}}</td>
-              <td>{{product.categoryName}}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.categoryName }}</td>
               <td>
                 <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addProductModal"
                   title="Save" (click)="open()">

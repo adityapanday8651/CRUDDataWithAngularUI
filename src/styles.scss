@@ -40,3 +40,32 @@
   
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.custom-navbar {
+  background-color: #006B3C; /* Cadmium Green */
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link,
+.custom-navbar .navbar-toggler-icon {
+  color: #fff; /* White text for better contrast */
+}
+
+.custom-navbar .nav-link.active {
+  color: #FFD700; /* Optional: Highlight active link with a gold color */
+}
+
+.btn-outline-info,
+.btn-outline-primary {
+  border-color: #FFD700; /* Optional: Outline buttons with a gold border */
+  color: #FFD700; /* Gold text for buttons */
+}
+
+.btn-outline-info:hover,
+.btn-outline-primary:hover {
+  background-color: #FFD700; /* Gold background on hover */
+  color: #006B3C; /* Cadmium Green text on hover */
+}
+

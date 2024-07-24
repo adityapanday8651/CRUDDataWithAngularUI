@@ -4,6 +4,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -39,7 +40,8 @@ export class ProductComponent implements OnInit {
 
   public async getAllCategoriesAsync() {
     await this.categoryService.getAllCategoriesAsync().subscribe(response => {
-      this.lstAllCategories = response.data;
+      this.lstAllCategories = response.data.categories;
+      console.log("lstAllCategories " , this.lstAllCategories);
     },
       error => {
         console.error('Error fetching categories:', error);

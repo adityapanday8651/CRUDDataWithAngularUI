@@ -20,9 +20,6 @@
         [ngClass]="{'is-invalid': isPasswordInvalid()}" placeholder="password">
       <div *ngIf="isPasswordInvalid()" class="text-danger validationMessage">
         <div *ngIf="loginForm.get('password').errors?.required">Password is required.</div>
-        <div *ngIf="loginForm.get('password').errors?.minlength">Password must be at least 3 characters
-          long.
-        </div>
       </div>
     </form>
     <button (click)="onLogin()">login</button>

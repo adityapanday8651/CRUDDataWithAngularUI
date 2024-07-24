@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
