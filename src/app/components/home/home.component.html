@@ -1,1 +1,18 @@
-<h1>Home Components</h1>
+<div class="home-container">
+  <header class="home-header">
+    <h1>Welcome to Devraj Medicals</h1>
+  </header>
+  <section class="home-content">
+    <h1>Medicals</h1>
+    <div class="shop-items" *ngFor="let product of lstAllProducts">
+      <div class="shop-item">
+        <h3> Name : {{ product.name}}</h3>
+        <p>Category Name : {{ product.categoryName }}</p>
+        <p>Price : {{ product.price }}</p>
+      </div>
+    </div>
+  </section>
+  <footer class="home-footer">
+    <p>&copy; 2024 My Shop</p>
+  </footer>
+</div>

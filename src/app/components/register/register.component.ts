@@ -34,7 +34,6 @@ export class RegisterComponent implements OnInit {
   async onRegister() {
     if (this.registerForm.valid) {
       await this.authService.AddRegisterAsync(this.registerForm.value).subscribe((response => {
-        console.log("Register Response : ", response);
         if (response.status) {
           Swal.fire({
             position: "top",

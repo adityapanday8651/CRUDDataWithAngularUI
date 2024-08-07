@@ -9,10 +9,47 @@
 }
 
 .custom-navbar .nav-link.active {
-  color: #FFD700; /* Optional: Highlight active link with a gold color */
+  color: #FFD700; /* Highlight active link with a gold color */
 }
 
-.btn-outline-info,
-.btn-outline-primary {
+.custom-navbar .nav-link {
+  margin-right: 1rem; /* Add spacing between links */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.custom-navbar .nav-link:hover {
+  color: #FFD700; /* Change color on hover */
+}
+
+.custom-navbar .btn-outline-light {
   border-color: #FFD700;
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and color change */
+}
+
+.custom-navbar .btn-outline-light:hover {
+  background-color: #FFD700; /* Gold background on hover */
+  color: #006B3C; /* Cadmium Green text on hover */
+}
+
+/* Specific styles for Logout button */
+.custom-navbar .btn-logout:hover {
+  background-color: #FF0000; /* Red background on hover for Logout */
+  color: #fff; /* White text on hover for Logout */
+}
+
+/* Specific styles for Login button */
+.custom-navbar .btn-login:hover {
+  background-color: #FFD700; /* Yellow background on hover for Login */
+  color: #006B3C; /* Cadmium Green text on hover for Login */
+}
+
+/* Ensure proper alignment of nav items */
+.navbar-nav {
+  align-items: center;
+}
+
+/* Adjust navbar toggler icon color */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }

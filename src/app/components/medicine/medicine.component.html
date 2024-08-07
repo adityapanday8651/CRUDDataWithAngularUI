@@ -1,0 +1,172 @@
+<div>
+    <h2>Medicals List</h2>
+    <table class="table table-bordered table-striped" *ngIf="listMedicinesData.length > 0; else noMedicines">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Manufacturer</th>
+                <th>Expiry Date</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let medical of listMedicinesData">
+                <td>{{ medical.name }}</td>
+                <td>{{ medical.category }}</td>
+                <td>{{ medical.price }}</td>
+                <td>{{ medical.manufacturer }}</td>
+                <td>{{ medical.expiryDate | date }}</td>
+                <td><img [src]="medical.imageUrl" alt="Medical Image" width="50" /></td>
+                <td>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#editMedicalModal" title="Edit" (click)="editMedical(medical)">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #noMedicines>
+        <div class="no-products-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>No Medicine available.</p>
+        </div>
+    </ng-template>
+    <div class="text-end">
+        <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addMedicalModal"
+            title="Add" (click)="open()">
+            <i class="fa fa-plus"></i>
+        </button>
+    </div>
+</div>
+<div class="modal fade" id="editMedicalModal" tabindex="-1" aria-labelledby="editMedicalModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editMedicalModalLabel">Edit Medical</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="medicalForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" formControlName="name"
+                            [ngClass]="{'is-invalid': isFieldInvalid('name')}">
+                        <div *ngIf="isFieldInvalid('name')" class="text-danger">
+                            <div *ngIf="medicalForm.get('name')?.errors?.required">Name is required.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="category" formControlName="category"
+                            [ngClass]="{'is-invalid': isFieldInvalid('category')}">
+                        <div *ngIf="isFieldInvalid('category')" class="text-danger">
+                            <div *ngIf="medicalForm.get('category')?.errors?.required">Category is required.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="price" formControlName="price"
+                            [ngClass]="{'is-invalid': isFieldInvalid('price')}">
+                        <div *ngIf="isFieldInvalid('price')" class="text-danger">
+                            <div *ngIf="medicalForm.get('price')?.errors?.required">Price is required.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="manufacturer" class="form-label">Manufacturer</label>
+                        <input type="text" class="form-control" id="manufacturer" formControlName="manufacturer"
+                            [ngClass]="{'is-invalid': isFieldInvalid('manufacturer')}">
+                        <div *ngIf="isFieldInvalid('manufacturer')" class="text-danger">
+                            <div *ngIf="medicalForm.get('manufacturer')?.errors?.required">Manufacturer is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expiryDate" class="form-label">Expiry Date</label>
+                        <input type="date" class="form-control" id="expiryDate" formControlName="expiryDate"
+                            [ngClass]="{'is-invalid': isFieldInvalid('expiryDate')}">
+                        <div *ngIf="isFieldInvalid('expiryDate')" class="text-danger">
+                            <div *ngIf="medicalForm.get('expiryDate')?.errors?.required">Expiry Date is required.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageUrl" class="form-label">Image URL</label>
+                        <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl">
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!medicalForm.valid"
+                        (click)="updateMedicalAsync()">Edit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addMedicalModal" tabindex="-1" aria-labelledby="addMedicalModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addMedicalModalLabel">Add Medical</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="medicalForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" formControlName="name"
+                            [ngClass]="{'is-invalid': isFieldInvalid('name')}">
+                        <div *ngIf="isFieldInvalid('name')" class="text-danger">
+                            <div *ngIf="medicalForm.get('name')?.errors?.required">Name is required.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="category" formControlName="category"
+                            [ngClass]="{'is-invalid': isFieldInvalid('category')}">
+                        <div *ngIf="isFieldInvalid('category')" class="text-danger">
+                            <div *ngIf="medicalForm.get('category')?.errors?.required">Category is required.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="price" formControlName="price"
+                            [ngClass]="{'is-invalid': isFieldInvalid('price')}">
+                        <div *ngIf="isFieldInvalid('price')" class="text-danger">
+                            <div *ngIf="medicalForm.get('price')?.errors?.required">Price is required.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="manufacturer" class="form-label">Manufacturer</label>
+                        <input type="text" class="form-control" id="manufacturer" formControlName="manufacturer"
+                            [ngClass]="{'is-invalid': isFieldInvalid('manufacturer')}">
+                        <div *ngIf="isFieldInvalid('manufacturer')" class="text-danger">
+                            <div *ngIf="medicalForm.get('manufacturer')?.errors?.required">Manufacturer is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expiryDate" class="form-label">Expiry Date</label>
+                        <input type="date" class="form-control" id="expiryDate" formControlName="expiryDate"
+                            [ngClass]="{'is-invalid': isFieldInvalid('expiryDate')}">
+                        <div *ngIf="isFieldInvalid('expiryDate')" class="text-danger">
+                            <div *ngIf="medicalForm.get('expiryDate')?.errors?.required">Expiry Date is required.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageUrl" class="form-label">Image URL</label>
+                        <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl">
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!medicalForm.valid"
+                        (click)="addMedicalAsync()">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

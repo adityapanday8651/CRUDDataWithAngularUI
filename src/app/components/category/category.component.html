@@ -2,7 +2,8 @@
   <div class="container mt-5">
     <div class="row align-items-center">
       <div class="col-12 col-md-8">
-        <table class="table table-bordered table-striped">
+        <strong>Category Table</strong>
+        <table class="table table-bordered table-striped" *ngIf="lstAllCategories.length > 0; else noCategories">
           <thead>
             <tr>
               <th scope="col">Category Name</th>
@@ -13,26 +14,34 @@
             <tr *ngFor="let category of lstAllCategories">
               <td>{{category.name}}</td>
               <td>
-                <button type="button" class="btn fafaIconColor" data-bs-toggle="modal"
-                  data-bs-target="#addCategotyModal" title="Save" (click)="open()">
-                  <i class="fa fa-plus"></i> Save
-                </button>
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editCategotyModal"
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editCategoryModal"
                   title="Edit" (click)="editOpen(category.id)">
-                  <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
                 </button>
                 <button type="button" class="btn btn-danger" title="Delete" (click)="deleteCategoryAsync(category.id)">
-                  <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                  <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
+        <ng-template #noCategories>
+          <div class="no-products-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>No Category available.</p>
+          </div>
+        </ng-template>
+        <div class="text-end">
+          <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addCategoryModal"
+            title="Add" (click)="open()">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </body>
-<div class="modal fade" id="addCategotyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -60,7 +69,7 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="editCategotyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

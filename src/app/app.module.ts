@@ -18,6 +18,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
+import { MedicineComponent } from './components/medicine/medicine.component';
 
 
 export function tokenGetter() {
@@ -38,6 +39,7 @@ export function tokenGetter() {
     ModalComponent,
     SidebarComponent,
     MainContentComponent,
+    MedicineComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { ProtectedComponent } from './components/protected/protected.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
+import { MedicineComponent } from './components/medicine/medicine.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] }, 
   { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: MainContentComponent, canActivate: [AuthGuard] },
+  { path: 'medicine', component: MedicineComponent, canActivate: [AuthGuard] },
   { path: 'main-content', component: MainContentComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
 ];

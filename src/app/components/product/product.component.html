@@ -3,36 +3,46 @@
     <div class="row align-items-center mt-5">
       <div class="col-12 col-md-8">
         <strong>Product Table</strong>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Price</th>
-              <th scope="col">Category Name</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let product of lstAllProducts">
-              <td>{{ product.name }}</td>
-              <td>{{ product.price }}</td>
-              <td>{{ product.categoryName }}</td>
-              <td>
-                <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addProductModal"
-                  title="Save" (click)="open()">
-                  <i class="fa fa-plus"></i> Save
-                </button>
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProductModal"
-                  title="Edit" (click)="editOpen(product.id)">
-                  <i class="fa fa-pencil" aria-hidden="true"></i> Edit
-                </button>
-                <button type="button" class="btn btn-danger" title="Delete" (click)="deleteProducrAsync(product.id)">
-                  <i class="fa fa-trash" aria-hidden="true"></i> Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div *ngIf="lstAllProducts && lstAllProducts.length > 0; else noProducts">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of lstAllProducts">
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.categoryName }}</td>
+                <td>
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                    data-bs-target="#editProductModal" title="Edit" (click)="editOpen(product.id)">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger" title="Delete" (click)="deleteProducrAsync(product.id)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #noProducts>
+          <div class="no-products-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>No products available.</p>
+          </div>
+        </ng-template>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addProductModal"
+          title="Add" (click)="open()">
+          <i class="fa fa-plus"></i>
+        </button>
       </div>
     </div>
   </div>

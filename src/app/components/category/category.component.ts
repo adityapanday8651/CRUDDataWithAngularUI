@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CATEGORY_SEED_DATA } from 'src/app/models/allseeddata';
 import { CategoryService } from 'src/app/services/category.service';
 import Swal from 'sweetalert2';
 
@@ -21,7 +22,7 @@ export class CategoryComponent implements OnInit {
 
   async ngOnInit() {
     await this.getValidateForm();
-    await this.getAllCategoriesAsync();
+     await this.getAllCategoriesAsync();
 
   }
 
@@ -35,7 +36,6 @@ export class CategoryComponent implements OnInit {
   public async getAllCategoriesAsync() {
     await this.categoryService.getAllCategoriesAsync().subscribe(response => {
       this.lstAllCategories = response.data.categories;
-      console.log("lstAllCategories " , this.lstAllCategories);
     },
       error => {
         console.error('Error fetching categories:', error);
@@ -47,7 +47,7 @@ export class CategoryComponent implements OnInit {
     return this.categoryForm.get('name');
   }
 
-  open(){
+  open() {
     this.categoryForm.reset();
   }
 
@@ -76,7 +76,7 @@ export class CategoryComponent implements OnInit {
   public async addCategoryAsync() {
     if (this.categoryForm.valid) {
       await this.categoryService.addCategoryAsync(this.categoryForm.value).subscribe(response => {
-        console.log("Response addCategoryAsync :", response);
+        this.categoryForm.reset();
       },
         error => {
           console.error('Error save categories:', error);
@@ -90,11 +90,12 @@ export class CategoryComponent implements OnInit {
       const id = this.categoryForm.value.id;
       const categoryDto = this.categoryForm.value;
       await this.categoryService.updateCategoryAsync(id, categoryDto).subscribe((response => {
+        this.categoryForm.reset();
       }))
     }
   }
 
-  public async deleteCategoryAsync(id:any) {
+  public async deleteCategoryAsync(id: any) {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
