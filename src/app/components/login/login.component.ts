@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
     public authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-  ) {  }
-  
+  ) { }
+
   ngOnInit(): void {
-   this.loginReactiveForms();
+    this.loginReactiveForms();
   }
 
   isUserNameInvalid(): boolean {
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     return control && control.invalid && (control.dirty || control.touched);
   }
 
- 
+
 
   public async loginReactiveForms() {
     this.loginForm = this.fb.group({
@@ -74,5 +74,5 @@ export class LoginComponent implements OnInit {
 
   openModal(): void {
     this.modal.open();
-     }
+  }
 }

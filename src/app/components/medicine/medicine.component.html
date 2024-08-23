@@ -18,7 +18,7 @@
                 <td>{{ medical.category }}</td>
                 <td>{{ medical.price }}</td>
                 <td>{{ medical.manufacturer }}</td>
-                <td>{{ medical.expiryDate | date }}</td>
+                <td>{{ medical.expiryDate | date:'dd-MM-yyyy' }}</td>
                 <td><img [src]="medical.imageUrl" alt="Medical Image" width="50" /></td>
                 <td>
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal"
