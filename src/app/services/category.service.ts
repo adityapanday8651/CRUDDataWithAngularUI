@@ -47,6 +47,17 @@ export class CategoryService {
         catchError(this.handleError)
       );
   }
+
+  getCategoriesPagedAsync(pageNumber: number, pageSize: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/api/Category/GetCategoriesPagedAsync`, {
+      params: {
+        pageNumber: pageNumber.toString(),
+        pageSize: pageSize.toString()
+      }
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
   
 
    // Handle errors

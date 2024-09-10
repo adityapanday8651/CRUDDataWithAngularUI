@@ -5,6 +5,7 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,13 @@ import { Router } from '@angular/router';
 export class AuthService {
   private apiUrl = environment.apiUrl;
   private readonly TOKEN_KEY = 'token';
-  private readonly REFRESH_TOKEN_KEY = 'refresh-token';
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) { }
 
+  constructor(
+    private http: HttpClient,
+     private jwtHelper: JwtHelperService,
+      private router: Router,
+      private notificationService : NotificationService
+    ) { }
 
   getAllRolesAsync(): Observable<any> {
     return this.http.get(`${this.apiUrl}/api/auth/GetAllRolesAsync`)
@@ -24,7 +29,7 @@ export class AuthService {
   AddRegisterAsync(registerModel: User): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/auth/AddRegisterAsync`, registerModel).pipe(
       tap((response: any) => {
-        this.storeTokens(response.token, response.refreshToken);
+        this.storeToken(response.token);
       }),
       catchError(this.handleError)
     );
@@ -33,29 +38,18 @@ export class AuthService {
   login(user: User): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/auth/login`, user).pipe(
       tap((response: any) => {
-        this.storeTokens(response.token, response.refreshToken);
-      }),
-      catchError(this.handleError)
-    );
-  }
-
-  refreshToken(): Observable<any> {
-    const refreshToken = this.getRefreshToken();
-    return this.http.post(`${this.apiUrl}/api/auth/refresh`, { refreshToken }).pipe(
-      tap((response: any) => {
-        this.storeTokens(response.token, response.refreshToken);
+        this.storeToken(response.token);
       }),
       catchError(this.handleError)
     );
   }
 
   logoutAPICalls(): void {
-    const refreshToken = this.getRefreshToken();
     localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
-    this.http.post(`${this.apiUrl}/api/auth/logout`, { refreshToken }).subscribe(
+    this.http.post(`${this.apiUrl}/api/auth/logout`, {}).subscribe(
       () => {
         this.router.navigate(['/login']);
+        this.notificationService.showSuccess("Logout Successfully");
       },
       error => {
         console.error('Error notifying server about logout', error);
@@ -64,28 +58,17 @@ export class AuthService {
     );
   }
 
-  isAuthenticated(): boolean {
+  isAuthenticated(): any {
     const token = this.getToken();
-    if (token && !this.jwtHelper.isTokenExpired(token)) {
-      return true;
-    } else if (this.getRefreshToken()) {
-      this.refreshToken().subscribe();
-      return true;
-    }
-    return false;
+    return token && !this.jwtHelper.isTokenExpired(token);
   }
 
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  getRefreshToken(): string | null {
-    return localStorage.getItem(this.REFRESH_TOKEN_KEY);
-  }
-
-  private storeTokens(token: string, refreshToken: string): void {
+  private storeToken(token: string): void {
     localStorage.setItem(this.TOKEN_KEY, token);
-    localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -100,3 +83,4 @@ export class AuthService {
     return throwError(errorMessage);
   }
 }
+

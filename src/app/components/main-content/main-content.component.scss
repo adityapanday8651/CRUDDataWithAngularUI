@@ -1,4 +1,15 @@
-.main-content {
-    padding: 20px;
-  }
-  
+/* custom-tab.component.css */
+.nav-tabs .nav-link {
+  color: #333;
+}
+
+.nav-tabs .nav-link.active {
+  color: #007bff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.tab-content {
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-top: none;
+}

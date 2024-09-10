@@ -54,14 +54,21 @@ export class ProductService {
         catchError(this.handleError)
       );
   }
-   // Handle errors
+
+
+  getAllMedicinesAsync(): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/Medicine/GetAllMedicinesAsync`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  
    private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
-      // Client-side errors
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side errors
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     return throwError(errorMessage);

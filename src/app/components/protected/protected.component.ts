@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -7,19 +8,25 @@ import { environment } from 'src/environments/environment';
   templateUrl: './protected.component.html',
   styleUrls: ['./protected.component.scss']
 })
-export class ProtectedComponent implements OnInit{
+export class ProtectedComponent implements OnInit {
 
   message: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private spinner: NgxSpinnerService
 
-  baseUrl=environment.apiUrl;
-  ngOnInit(): void {
-    this.http.get(`${this.baseUrl}/api/protected`, { responseType: 'text' })
-      .subscribe(
-        response => this.message = response,
-        error => console.error('Error fetching protected data', error)
-      );
+  ) { }
+
+  baseUrl = environment.apiUrl;
+  async ngOnInit() {
+    await this.spinnerStart();
   }
-
+  public async spinnerStart() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 500);
+  }
 }
+

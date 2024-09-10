@@ -30,20 +30,20 @@
               </tr>
             </tbody>
           </table>
-        </div>
-        <ng-template #noProducts>
-          <div class="no-products-message">
-            <i class="fas fa-exclamation-circle"></i>
-            <p>No products available.</p>
+          <div class="addMarginButton">
+            <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addProductModal"
+              title="Add" (click)="open()">
+              <i class="fa fa-plus"></i>
+            </button>
           </div>
-        </ng-template>
+        </div>
       </div>
-      <div class="text-center">
-        <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addProductModal"
-          title="Add" (click)="open()">
-          <i class="fa fa-plus"></i>
-        </button>
-      </div>
+      <ng-template #noProducts>
+        <div class="no-products-message">
+          <i class="fas fa-exclamation-circle" title="Products is not available or User Unuthorized"></i>
+          <p>No Products available.</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 </body>
@@ -91,14 +91,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
 <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

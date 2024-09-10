@@ -3,7 +3,8 @@
     <div class="row align-items-center">
       <div class="col-12 col-md-8">
         <strong>Category Table</strong>
-        <table class="table table-bordered table-striped" *ngIf="lstAllCategories.length > 0; else noCategories">
+        <div *ngIf="lstAllCategories && lstAllCategories.length > 0; else nolstAllCategories">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th scope="col">Category Name</th>
@@ -25,19 +26,40 @@
             </tr>
           </tbody>
         </table>
-        <ng-template #noCategories>
-          <div class="no-products-message">
-            <i class="fas fa-exclamation-circle"></i>
-            <p>No Category available.</p>
-          </div>
-        </ng-template>
-        <div class="text-end">
+        <nav *ngIf="totalPages > 1">
+          <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <a class="page-link" (click)="onPageChange(1)">First</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+            </li>
+            <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+                [class.active]="currentPage === (i + 1)">
+              <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <a class="page-link" (click)="onPageChange(totalPages)">Last</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="addMarginButton">
           <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addCategoryModal"
             title="Add" (click)="open()">
             <i class="fa fa-plus"></i>
           </button>
         </div>
       </div>
+    </div>
+    <ng-template #nolstAllCategories>
+      <div class="no-products-message">
+        <i class="fas fa-exclamation-circle" title="Category is not available or User Unuthorized"></i>
+        <p>No Category available.</p>
+      </div>
+    </ng-template>
     </div>
   </div>
 </body>
