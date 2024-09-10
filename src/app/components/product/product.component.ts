@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
 
@@ -15,14 +16,20 @@ export class ProductComponent implements OnInit {
   lstAllCategories: any[] = [];
   lstAllProducts: any[] = [];
   checkOperationStatus: boolean | any;
-  updateProductModel:any;
+  updateProductModel: any;
 
-  constructor(private fb: FormBuilder, private productService: ProductService, private categoryService: CategoryService) {
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private categoryService: CategoryService,
+    private notificationService: NotificationService
+  ) {
     this.productForm = this.fb.group({
+      id: [''],
       name: ['', [Validators.required, Validators.minLength(3)]],
       price: [, [Validators.required, Validators.min(0.01)]],
       categoryId: ['', Validators.required],
-      categoryName: []
+      categoryName: ['']
     });
   }
 
@@ -73,7 +80,9 @@ export class ProductComponent implements OnInit {
 
   public async addProductAsync() {
     if (this.productForm.valid) {
+      console.log(" addProductAsync Models : ", this.productForm.value);
       await this.productService.addProductAsync(this.productForm.value).subscribe(response => {
+        this.notificationService.showSuccess(response.message);
       },
         error => {
           console.error('Error save categories:', error);
@@ -83,7 +92,9 @@ export class ProductComponent implements OnInit {
   }
   public async updateProductAsync() {
     if (this.productForm.valid) {
-      await this.productService.updateProductAsync(this.updateProductModel.id, this.updateProductModel).subscribe((response => {
+      console.log("productForm Data :Update : ", this.productForm.value)
+      await this.productService.updateProductAsync(this.productForm.value.id, this.productForm.value).subscribe((response => {
+        this.notificationService.showSuccess(response.message);
       }))
     }
   }
@@ -104,7 +115,7 @@ export class ProductComponent implements OnInit {
   }
 
 
-  updateModel(response:any): any {
+  updateModel(response: any): any {
     const product: Product = {
       id: response.data.id,
       name: response.data.name,
@@ -112,10 +123,10 @@ export class ProductComponent implements OnInit {
       categoryId: response.data.categoryId,
       categoryName: response.data.categoryName,
     };
-    this.updateProductModel=product;
+    this.updateProductModel = product;
     return this.updateProductModel;
   }
-  
+
 
 
   public async deleteProducrAsync(id: any) {

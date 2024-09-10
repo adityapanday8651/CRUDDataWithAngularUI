@@ -5,6 +5,7 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,12 @@ export class AuthService {
   private apiUrl = environment.apiUrl;
   private readonly TOKEN_KEY = 'token';
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+     private jwtHelper: JwtHelperService,
+      private router: Router,
+      private notificationService : NotificationService
+    ) { }
 
   getAllRolesAsync(): Observable<any> {
     return this.http.get(`${this.apiUrl}/api/auth/GetAllRolesAsync`)
@@ -43,6 +49,7 @@ export class AuthService {
     this.http.post(`${this.apiUrl}/api/auth/logout`, {}).subscribe(
       () => {
         this.router.navigate(['/login']);
+        this.notificationService.showSuccess("Logout Successfully");
       },
       error => {
         console.error('Error notifying server about logout', error);

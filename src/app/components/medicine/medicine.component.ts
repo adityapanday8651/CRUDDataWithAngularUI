@@ -14,11 +14,14 @@ export class MedicineComponent implements OnInit {
     { name: 'Aspirin', category: 'Painkiller', price: 10, manufacturer: 'Company A', expiryDate: new Date(), imageUrl: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg' }
   ];
   public medicalForm: FormBuilder | any;
-  constructor(private fb: FormBuilder, private productService: ProductService) { }
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService
+  ) { }
   async ngOnInit() {
     this.validateMedicalForm();
     this.listMedicinesData;
-   await this.getAllMedicinesAsync();
+    await this.getAllMedicinesAsync();
   }
 
   public validateMedicalForm() {
@@ -38,8 +41,8 @@ export class MedicineComponent implements OnInit {
     const options = { year: 'numeric', month: 'short', day: 'numeric' } as const;
     return d.toLocaleDateString('en-US', options);
   }
-  
-  
+
+
   public async getAllMedicinesAsync() {
     await this.productService.getAllMedicinesAsync().subscribe((response => {
       this.lstAllMedicines = response.data;
@@ -64,8 +67,8 @@ export class MedicineComponent implements OnInit {
       imageUrl: medical.imageUrl
     });
   }
-  
-  
+
+
 
   public updateMedicalAsync() {
 

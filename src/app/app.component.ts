@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+import { NotificationService } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,13 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'ProductCategory';
   isSidebarOpen: boolean = false;
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.gotoHomePage();
+
   }
 
   onLogout() {
@@ -24,9 +28,9 @@ export class AppComponent implements OnInit {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  gotoHomePage(){
+  gotoHomePage() {
     const token = this.authService.getToken();
-    if(token !='' && token !== undefined && token !== null){
+    if (token != '' && token !== undefined && token !== null) {
       this.router.navigate(['/home']);
     }
   }

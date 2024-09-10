@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { MedicineComponent } from './components/medicine/medicine.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 export function tokenGetter() {
@@ -53,6 +54,7 @@ export function tokenGetter() {
       }
     }),
     BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

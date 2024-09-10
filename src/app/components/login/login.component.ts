@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalComponent } from '../modal/modal.component';
 import Swal from 'sweetalert2';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     public authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -48,25 +50,12 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         () => {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Login Successfully",
-            showConfirmButton: false,
-            timer: 1500
-          });
+          this.notificationService.showSuccess("Login Successfully");
           this.loginForm.reset();
           this.router.navigate(['/home']);
         },
         error => {
-          console.error('Login failed', error);
-          Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: "User Unauthorized",
-            showConfirmButton: false,
-            timer: 1500
-          });
+          this.notificationService.showError("User Unauthorized");
         }
       );
     }

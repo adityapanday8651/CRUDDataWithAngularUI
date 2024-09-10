@@ -3,8 +3,8 @@
     <div class="row align-items-center">
       <div class="col-12 col-md-8">
         <strong>Category Table</strong>
-        <h2>Category List</h2>
-        <table class="table table-bordered table-striped" *ngIf="categories.length > 0; else noCategories">
+        <div *ngIf="lstAllCategories && lstAllCategories.length > 0; else nolstAllCategories">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th scope="col">Category Name</th>
@@ -12,7 +12,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let category of categories">
+            <tr *ngFor="let category of lstAllCategories">
               <td>{{category.name}}</td>
               <td>
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editCategoryModal"
@@ -26,12 +26,6 @@
             </tr>
           </tbody>
         </table>
-        <ng-template #noCategories>
-          <div class="no-products-message">
-            <i class="fas fa-exclamation-circle"></i>
-            <p>No Category available.</p>
-          </div>
-        </ng-template>
         <nav *ngIf="totalPages > 1">
           <ul class="pagination">
             <li class="page-item" [class.disabled]="currentPage === 1">
@@ -52,13 +46,20 @@
             </li>
           </ul>
         </nav>
-        <div class="text-end">
+        <div class="addMarginButton">
           <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addCategoryModal"
             title="Add" (click)="open()">
             <i class="fa fa-plus"></i>
           </button>
         </div>
       </div>
+    </div>
+    <ng-template #nolstAllCategories>
+      <div class="no-products-message">
+        <i class="fas fa-exclamation-circle" title="Category is not available or User Unuthorized"></i>
+        <p>No Category available.</p>
+      </div>
+    </ng-template>
     </div>
   </div>
 </body>

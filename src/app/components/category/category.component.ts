@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CategoryService } from 'src/app/services/category.service';
 import Swal from 'sweetalert2';
 
@@ -20,7 +21,8 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService
   ) { }
 
   async ngOnInit() {
@@ -38,8 +40,10 @@ export class CategoryComponent implements OnInit {
   }
 
   public async getAllCategoriesAsync() {
+    this.spinner.show();
     await this.categoryService.getAllCategoriesAsync().subscribe(response => {
       this.lstAllCategories = response.data.categories;
+      this.spinner.hide();
     },
       error => {
         console.error('Error fetching categories:', error);
