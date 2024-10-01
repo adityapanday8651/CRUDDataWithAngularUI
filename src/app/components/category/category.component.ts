@@ -19,6 +19,10 @@ export class CategoryComponent implements OnInit {
   public categoryForm: FormGroup | any;
   public lstAllCategories: any[] = [];
 
+          // To hold filtered categories
+  categoryFilter: string = '';      // Bound to the input field
+  isSearchTriggered: boolean = false;  // Flag to check if search was performed
+
   constructor(
     private categoryService: CategoryService,
     private fb: FormBuilder,
@@ -31,6 +35,14 @@ export class CategoryComponent implements OnInit {
     this.getCategoriesPagedAsync(this.currentPage, this.pageSize);
 
   }
+
+
+   // Fetch filtered categories from the API
+   getFilteredCategories() {
+    // Ensure the search was triggered
+    this.isSearchTriggered = true;
+  }
+
 
   public async getValidateForm() {
     this.categoryForm = this.fb.group({
@@ -75,32 +87,6 @@ export class CategoryComponent implements OnInit {
       name: response.data.name
     });
   }
-
-  getMockCategories() {
-    return [
-      { id: 1, name: 'Electronics' },
-      { id: 2, name: 'Books' },
-      { id: 3, name: 'Clothing' },
-      { id: 4, name: 'Sports' },
-      { id: 5, name: 'Home & Garden' },
-      { id: 6, name: 'Automotive' },
-      { id: 7, name: 'Health & Beauty' },
-      { id: 8, name: 'Toys' },
-      { id: 9, name: 'Grocery' },
-      { id: 10, name: 'Movies & Music' },
-      { id: 11, name: 'Video Games' },
-      { id: 12, name: 'Jewelry' },
-      { id: 13, name: 'Pets' },
-      { id: 14, name: 'Baby' },
-      { id: 15, name: 'Office Supplies' },
-      { id: 16, name: 'Crafts' },
-      { id: 17, name: 'Furniture' },
-      { id: 18, name: 'Shoes' },
-      { id: 19, name: 'Outdoors' },
-      { id: 20, name: 'Hardware' },
-    ];
-  }
-
   isNameInvalid(): boolean {
     const control = this.categoryForm.get('name');
     return control && control.invalid && (control.dirty || control.touched);
@@ -110,6 +96,7 @@ export class CategoryComponent implements OnInit {
     if (this.categoryForm.valid) {
       await this.categoryService.addCategoryAsync(this.categoryForm.value).subscribe(response => {
         this.categoryForm.reset();
+        this.getAllCategoriesAsync();
       },
         error => {
           console.error('Error save categories:', error);
@@ -142,6 +129,7 @@ export class CategoryComponent implements OnInit {
       const categoryDto = this.categoryForm.value;
       await this.categoryService.updateCategoryAsync(id, categoryDto).subscribe((response => {
         this.categoryForm.reset();
+        this.getAllCategoriesAsync();
       }))
     }
   }

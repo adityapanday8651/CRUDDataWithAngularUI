@@ -3,12 +3,12 @@
     <h1>Welcome to Devraj Medicals</h1>
   </header>
   <section class="home-content">
-    <h1>Medicals</h1>
-    <div class="shop-items" *ngFor="let product of lstAllProducts">
+    <h1>Available Medicals</h1>
+    <div class="shop-items" *ngFor="let medicine of getAllIsActiveMedicines">
       <div class="shop-item">
-        <h3> Name : {{ product.name}}</h3>
-        <p>Category Name : {{ product.categoryName }}</p>
-        <p>Price : {{ product.price }}</p>
+        <h3> Name : {{ medicine.name}}</h3>
+        <p>Category Name : {{ medicine.category }}</p>
+        <p>Price : {{ medicine.price }}</p>
       </div>
     </div>
   </section>

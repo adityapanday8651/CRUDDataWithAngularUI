@@ -1,6 +1,7 @@
-<div>
+<div class="container">
+    <app-protected></app-protected>
     <h2>Medicals List</h2>
-    <table class="table table-bordered table-striped" *ngIf="listMedicinesData.length > 0; else noMedicines">
+    <table class="table table-bordered table-striped" *ngIf="lstAllMedicines.length > 0; else noMedicines">
         <thead>
             <tr>
                 <th>Name</th>
@@ -9,22 +10,32 @@
                 <th>Manufacturer</th>
                 <th>Expiry Date</th>
                 <th>Image</th>
+                <th>IsActive</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let medical of listMedicinesData">
+            <tr *ngFor="let medical of lstAllMedicines">
                 <td>{{ medical.name }}</td>
                 <td>{{ medical.category }}</td>
                 <td>{{ medical.price }}</td>
                 <td>{{ medical.manufacturer }}</td>
                 <td>{{ medical.expiryDate | date:'dd-MM-yyyy' }}</td>
                 <td><img [src]="medical.imageUrl" alt="Medical Image" width="50" /></td>
+                <td>{{ medical.isActive }}</td>
                 <td>
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                        data-bs-target="#editMedicalModal" title="Edit" (click)="editMedical(medical)">
+                        data-bs-target="#editMedicalModal" title="Edit" (click)="editMedical(medical.id)">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
+                    <button *ngIf="medical.isActive" type="button" class="btn btn-danger enableButton" title="Disable"
+                        (click)="deleteMedicineAndUpdateAsync(medical.id)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                    <button *ngIf="!medical.isActive" type="button" class="btn btn-info enableButton" title="Enable"
+                    (click)="deleteMedicineAndUpdateAsync(medical.id)">
+                    <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                </button>
                 </td>
             </tr>
         </tbody>
@@ -97,7 +108,7 @@
                         <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl">
                     </div>
                     <button type="submit" class="btn btn-primary" [disabled]="!medicalForm.valid"
-                        (click)="updateMedicalAsync()">Edit</button>
+                        (click)="UpdateMedicineAsync()" data-bs-dismiss="modal">Edit</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -161,7 +172,7 @@
                         <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl">
                     </div>
                     <button type="submit" class="btn btn-primary" [disabled]="!medicalForm.valid"
-                        (click)="addMedicalAsync()">Save</button>
+                        (click)="addMedicineAsync()">Save</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -170,3 +181,15 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    // JavaScript to handle the "Save changes" button click
+    document.getElementById('saveChangesBtn').addEventListener('click', function() {
+      // Perform your saving logic here
+      console.log('Changes saved!'); // Replace this with actual save logic
+  
+      // Close the modal
+      $('#exampleModal').modal('hide'); // Use jQuery to hide the modal
+    });
+  </script>

@@ -63,6 +63,42 @@ export class ProductService {
       );
   }
 
+  getAllIsActiveMedicinesAsync(): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/Medicine/GetAllIsActiveMedicinesAsync`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+   addMedicineAsync(data: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`${this.apiUrl}/api/Medicine/AddMedicineAsync`, data, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  updateMedicineAsync(id: number, medicalDto: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/api/Medicine/UpdateMedicineAsync?id=${id}`, medicalDto)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  deleteMedicineAndUpdateAsync(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/api/Medicine/DeleteMedicineAndUpdateAsync?id=${id}`,  { status: 'deleted' })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  
+  getMedicineByIdAsync(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/api/Medicine/GetMedicineByIdAsync?id=${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   
    private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';

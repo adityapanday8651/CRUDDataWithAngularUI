@@ -13,7 +13,7 @@ export class NotificationService {
       icon: 'success',
       title: 'Success',
       text: message,
-      timer: 3000,
+      timer: 1500,
       timerProgressBar: true,
     });
   }
@@ -23,7 +23,7 @@ export class NotificationService {
       icon: 'error',
       title: 'Error',
       text: message,
-      timer: 3000,
+      timer: 1500,
       timerProgressBar: true,
     });
   }

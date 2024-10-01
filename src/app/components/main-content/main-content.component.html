@@ -1,11 +1,89 @@
 <div class="main-content">
-    <h1>Main Content</h1>
-    <p>This is the main content area.</p>
-
-  </div>
-
-  <button type="button" class="btn btn-warning" (click)="spinnerStart()">  SpinnerStartHere
-  </button>
-  
+  <h1>Main Content</h1>
+  <p>This is the main content area.</p>
+</div>
+<button type="button" class="btn btn-warning" (click)="spinnerStart()"> SpinnerStartHere
+</button>
 <app-protected></app-protected>
-  
+
+<div class="container mt-5">
+  <form [formGroup]="auditReportForm" (ngSubmit)="onSubmit()" class="bg-light p-4 rounded shadow-lg">
+    <h2 class="mb-4 text-center">Audit Report Form</h2>
+
+    <!-- Report ID and Report Name -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="reportId" class="form-label">Report ID</label>
+        <input id="reportId" formControlName="reportId" type="number" class="form-control" placeholder="Enter Report ID">
+        <div *ngIf="reportId?.invalid && reportId?.touched" class="text-danger">
+          <small *ngIf="reportId.errors?.required">Report ID is required.</small>
+          <small *ngIf="reportId.errors?.min">Report ID must be greater than 0.</small>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="reportName" class="form-label">Report Name</label>
+        <input id="reportName" formControlName="reportName" type="text" class="form-control" placeholder="Enter Report Name">
+        <div *ngIf="reportName?.invalid && reportName?.touched" class="text-danger">
+          <small *ngIf="reportName.errors?.required">Report Name is required.</small>
+          <small *ngIf="reportName.errors?.minlength">Report Name must be at least 5 characters long.</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Generated Date -->
+    <div class="mb-3">
+      <label for="generatedDate" class="form-label">Generated Date</label>
+      <input id="generatedDate" formControlName="generatedDate" type="date" class="form-control">
+      <div *ngIf="generatedDate?.invalid && generatedDate?.touched" class="text-danger">
+        <small *ngIf="generatedDate.errors?.required">Generated Date is required.</small>
+      </div>
+    </div>
+
+    <!-- Filters (including Date Range) -->
+    <fieldset formGroupName="filters" class="border p-3 mb-3">
+      <legend class="fw-bold">Filters</legend>
+
+      <!-- Date Range -->
+      <div formGroupName="dateRange" class="row">
+        <div class="col-md-6 mb-3">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input id="startDate" formControlName="startDate" type="date" class="form-control">
+          <div *ngIf="startDate?.invalid && startDate?.touched" class="text-danger">
+            <small *ngIf="startDate.errors?.required">Start Date is required.</small>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="endDate" class="form-label">End Date</label>
+          <input id="endDate" formControlName="endDate" type="date" class="form-control">
+          <div *ngIf="endDate?.invalid && endDate?.touched" class="text-danger">
+            <small *ngIf="endDate.errors?.required">End Date is required.</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entity Type -->
+      <div class="mb-3">
+        <label for="entityType" class="form-label">Entity Type</label>
+        <input id="entityType" formControlName="entityType" type="text" class="form-control" placeholder="Enter Entity Type">
+        <div *ngIf="entityType?.invalid && entityType?.touched" class="text-danger">
+          <small *ngIf="entityType.errors?.required">Entity Type is required.</small>
+          <small *ngIf="entityType.errors?.minlength">Entity Type must be at least 3 characters long.</small>
+        </div>
+      </div>
+
+      <!-- Audit Type -->
+      <div class="mb-3">
+        <label for="auditType" class="form-label">Audit Type</label>
+        <input id="auditType" formControlName="auditType" type="text" class="form-control" placeholder="Enter Audit Type">
+        <div *ngIf="auditType?.invalid && auditType?.touched" class="text-danger">
+          <small *ngIf="auditType.errors?.required">Audit Type is required.</small>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="auditReportForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>

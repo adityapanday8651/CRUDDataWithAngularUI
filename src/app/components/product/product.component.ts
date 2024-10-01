@@ -85,7 +85,7 @@ export class ProductComponent implements OnInit {
         this.notificationService.showSuccess(response.message);
       },
         error => {
-          console.error('Error save categories:', error);
+          console.error('Error save addProductAsync:', error);
         }
       );
     }

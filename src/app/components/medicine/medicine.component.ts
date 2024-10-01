@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -10,28 +12,30 @@ import { ProductService } from 'src/app/services/product.service';
 export class MedicineComponent implements OnInit {
 
   public lstAllMedicines: any[] = [];
-  public listMedicinesData: any = [
-    { name: 'Aspirin', category: 'Painkiller', price: 10, manufacturer: 'Company A', expiryDate: new Date(), imageUrl: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg' }
-  ];
+  public getAllIsActiveMedicines: any[] = [];
+  public medicalDto: any;
   public medicalForm: FormBuilder | any;
   constructor(
     private fb: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private notificationService: NotificationService,
+    private spinner: NgxSpinnerService
   ) { }
   async ngOnInit() {
     this.validateMedicalForm();
-    this.listMedicinesData;
     await this.getAllMedicinesAsync();
   }
 
   public validateMedicalForm() {
     this.medicalForm = this.fb.group({
+      id: [],
       name: ['', Validators.required],
       category: ['', Validators.required],
       price: [null, Validators.required],
       manufacturer: ['', Validators.required],
       expiryDate: [null, Validators.required],
-      imageUrl: ['']
+      imageUrl: [''],
+      isActive: [true]
     });
   }
 
@@ -44,46 +48,76 @@ export class MedicineComponent implements OnInit {
 
 
   public async getAllMedicinesAsync() {
+    this.spinner.show();
     await this.productService.getAllMedicinesAsync().subscribe((response => {
-      this.lstAllMedicines = response.data;
+      this.lstAllMedicines = response.data.medicines;
+      this.spinner.hide();
     }))
   }
 
-  addMedical() {
-    if (this.medicalForm.valid) {
-      // this.medicalForm.reset();
-      // Close modal programmatically
+  public async getAllIsActiveMedicinesAsync() {
+    await this.productService.getAllIsActiveMedicinesAsync().subscribe((response => {
+      this.getAllIsActiveMedicines = response.data;
+    }))
+  }
 
+  public async addMedicineAsync() {
+    if (this.medicalForm.valid) {
+      await this.productService.addMedicineAsync(this.medicalForm.value).subscribe(async response => {
+        this.medicalForm.reset();
+        await this.getAllMedicinesAsync();
+        this.notificationService.showSuccess(response.message);
+      },
+        error => {
+          console.error('Error save addProductAsync:', error);
+        }
+      );
     }
   }
-  editMedical(medical: any) {
-    const expiryDateISO = new Date(medical.expiryDate).toISOString().substring(0, 10); // Convert to YYYY-MM-DD
-    this.medicalForm.patchValue({
-      name: medical.name,
-      category: medical.category,
-      price: medical.price,
-      manufacturer: medical.manufacturer,
-      expiryDate: expiryDateISO, // Use YYYY-MM-DD format
-      imageUrl: medical.imageUrl
-    });
+  async editMedical(id: any) {
+    await this.productService.getMedicineByIdAsync(id).subscribe(async response => {
+      await this.patchValuesOfMedicine(response);
+    },
+      error => {
+        console.error('Error openModal categories:', error);
+      }
+    )
   }
 
-
-
-  public updateMedicalAsync() {
-
-
+  public patchValuesOfMedicine(response: any) {
+    const expiryDateISO = new Date(response.data.expiryDate).toISOString().substring(0, 10);
+    this.medicalForm.patchValue({
+      id: response.data.id,
+      name: response.data.name,
+      category: response.data.category,
+      price: response.data.price,
+      manufacturer: response.data.manufacturer,
+      expiryDate: expiryDateISO,  // Use ISO Date Format (YYYY-MM-DD) for proper form handling
+      imageUrl: response.data.imageUrl,
+      isActive: response.data.isActive
+    });
+  }
+  public async UpdateMedicineAsync() {
+    if (this.medicalForm.valid) {
+      const id = this.medicalForm.value.id;
+      const medicalDto = this.medicalForm.value;
+      this.productService.updateMedicineAsync(id, medicalDto).subscribe((async response => {
+        this.medicalForm.reset();
+        await this.getAllMedicinesAsync();
+        this.notificationService.showSuccess(response.Message);
+      }))
+    }
+  }
+  public async deleteMedicineAndUpdateAsync(id: any) {
+      this.productService.deleteMedicineAndUpdateAsync(id).subscribe((async response => {
+        await this.getAllMedicinesAsync();
+        this.notificationService.showSuccess(response.message);
+      }))
   }
 
   open() {
     this.medicalForm.reset();
   }
-
-
-  public addMedicalAsync() {
-
-  }
-
 
   isFieldInvalid(fieldName: string): boolean {
     const field = this.medicalForm.get(fieldName);
