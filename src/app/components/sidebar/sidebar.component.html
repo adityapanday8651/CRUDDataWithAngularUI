@@ -1,1 +1,255 @@
-<h1>This is Sidebar Components</h1>
+<form [formGroup]="formsEmployeeDepartments" (ngSubmit)="onSubmit()" class="form-container">
+  <div formGroupName="company" class="section">
+    <h2 class="section-title">Company Details</h2>
+    <div class="form-group">
+      <label for="companyName">Company Name</label>
+      <input id="companyName" formControlName="name" class="form-control" />
+      <div
+        *ngIf="formsEmployeeDepartments.get('company.name')?.invalid && formsEmployeeDepartments.get('company.name')?.touched"
+        class="error">
+        Company Name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="companyLocation">Location</label>
+      <input id="companyLocation" formControlName="location" class="form-control" />
+      <div
+        *ngIf="formsEmployeeDepartments.get('company.location')?.invalid && formsEmployeeDepartments.get('company.location')?.touched"
+        class="error">
+        Location is required.
+      </div>
+    </div>
+
+    <div formGroupName="departments" class="section">
+      <h3 class="section-title">Department Details</h3>
+
+      <div class="form-group">
+        <label for="departmentId">Department ID</label>
+        <input id="departmentId" formControlName="departmentId" class="form-control" />
+        <div
+          *ngIf="formsEmployeeDepartments.get('company.departments.departmentId')?.invalid && formsEmployeeDepartments.get('company.departments.departmentId')?.touched"
+          class="error">
+          Department ID is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="departmentName">Department Name</label>
+        <input id="departmentName" formControlName="departmentName" class="form-control" />
+        <div
+          *ngIf="formsEmployeeDepartments.get('company.departments.departmentName')?.invalid && formsEmployeeDepartments.get('company.departments.departmentName')?.touched"
+          class="error">
+          Department Name is required.
+        </div>
+      </div>
+
+      <div formGroupName="manager" class="section">
+        <h4 class="section-title">Manager Details</h4>
+
+        <div class="form-group">
+          <label for="managerId">Manager ID</label>
+          <input id="managerId" formControlName="managerId" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.manager.managerId')?.invalid && formsEmployeeDepartments.get('company.departments.manager.managerId')?.touched"
+            class="error">
+            Manager ID is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="managerName">Manager Name</label>
+          <input id="managerName" formControlName="managerName" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.manager.managerName')?.invalid && formsEmployeeDepartments.get('company.departments.manager.managerName')?.touched"
+            class="error">
+            Manager Name is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="managerEmail">Email</label>
+          <input id="managerEmail" formControlName="email" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.manager.email')?.invalid && formsEmployeeDepartments.get('company.departments.manager.email')?.touched"
+            class="error">
+            Enter a valid email.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="managerPhone">Phone</label>
+          <input id="managerPhone" formControlName="phone" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.manager.phone')?.invalid && formsEmployeeDepartments.get('company.departments.manager.phone')?.touched"
+            class="error">
+            Phone is required.
+          </div>
+        </div>
+      </div>
+
+      <div formGroupName="employees" class="section">
+        <h4 class="section-title">Employee Details</h4>
+
+        <div class="form-group">
+          <label for="employeeId">Employee ID</label>
+          <input id="employeeId" formControlName="employeeId" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.employees.employeeId')?.invalid && formsEmployeeDepartments.get('company.departments.employees.employeeId')?.touched"
+            class="error">
+            Employee ID is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="employeeName">Employee Name</label>
+          <input id="employeeName" formControlName="name" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.employees.name')?.invalid && formsEmployeeDepartments.get('company.departments.employees.name')?.touched"
+            class="error">
+            Employee Name is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="employeePosition">Position</label>
+          <input id="employeePosition" formControlName="position" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.employees.position')?.invalid && formsEmployeeDepartments.get('company.departments.employees.position')?.touched"
+            class="error">
+            Position is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="employeeSalary">Salary</label>
+          <input id="employeeSalary" formControlName="salary" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.employees.salary')?.invalid && formsEmployeeDepartments.get('company.departments.employees.salary')?.touched"
+            class="error">
+            Salary is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="hireDate">Hire Date</label>
+          <input id="hireDate" formControlName="hireDate" type="date" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.employees.hireDate')?.invalid && formsEmployeeDepartments.get('company.departments.employees.hireDate')?.touched"
+            class="error">
+            Hire Date is required.
+          </div>
+        </div>
+
+        <div formGroupName="address" class="section">
+          <h5 class="section-title">Address</h5>
+          <div class="form-group">
+            <label for="street">Street</label>
+            <input id="street" formControlName="street" class="form-control" />
+            <div
+              *ngIf="formsEmployeeDepartments.get('company.departments.employees.address.street')?.invalid && formsEmployeeDepartments.get('company.departments.employees.address.street')?.touched"
+              class="error">
+              Street is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <input id="city" formControlName="city" class="form-control" />
+            <div
+              *ngIf="formsEmployeeDepartments.get('company.departments.employees.address.city')?.invalid && formsEmployeeDepartments.get('company.departments.employees.address.city')?.touched"
+              class="error">
+              City is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="state">State</label>
+            <input id="state" formControlName="state" class="form-control" />
+            <div
+              *ngIf="formsEmployeeDepartments.get('company.departments.employees.address.state')?.invalid && formsEmployeeDepartments.get('company.departments.employees.address.state')?.touched"
+              class="error">
+              State is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="zip">Zip Code</label>
+            <input id="zip" formControlName="zip" class="form-control" />
+            <div
+              *ngIf="formsEmployeeDepartments.get('company.departments.employees.address.zip')?.invalid && formsEmployeeDepartments.get('company.departments.employees.address.zip')?.touched"
+              class="error">
+              Zip Code is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div formGroupName="projects" class="section">
+        <h4 class="section-title">Project Details</h4>
+
+        <div class="form-group">
+          <label for="projectId">Project ID</label>
+          <input id="projectId" formControlName="projectId" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.projects.projectId')?.invalid && formsEmployeeDepartments.get('company.departments.projects.projectId')?.touched"
+            class="error">
+            Project ID is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input id="projectName" formControlName="projectName" class="form-control" />
+          <div
+            *ngIf="formsEmployeeDepartments.get('company.departments.projects.projectName')?.invalid && formsEmployeeDepartments.get('company.departments.projects.projectName')?.touched"
+            class="error">
+            Project Name is required.
+          </div>
+        </div>
+
+        <div formGroupName="tasks" class="section">
+          <h5 class="section-title">Task Details</h5>
+
+          <div class="form-group">
+            <label for="taskId">Task ID</label>
+            <input id="taskId" formControlName="taskId" class="form-control" />
+            <div
+              *ngIf="formsEmployeeDepartments.get('company.departments.projects.tasks.taskId')?.invalid && formsEmployeeDepartments.get('company.departments.projects.tasks.taskId')?.touched"
+              class="error">
+              Task ID is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="taskName">Task Name</label>
+            <input id="taskName" formControlName="taskName" class="form-control" />
+            <div
+              *ngIf="formsEmployeeDepartments.get('company.departments.projects.tasks.taskName')?.invalid && formsEmployeeDepartments.get('company.departments.projects.tasks.taskName')?.touched"
+              class="error">
+              Task Name is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input id="deadline" formControlName="deadline" type="date" class="form-control" />
+            <div
+              *ngIf="formsEmployeeDepartments.get('company.departments.projects.tasks.deadline')?.invalid && formsEmployeeDepartments.get('company.departments.projects.tasks.deadline')?.touched"
+              class="error">
+              Deadline is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="completed">Completed</label>
+            <input class="form-check-input" type="checkbox" value="" formControlName="completed" id="completed">
+            <div
+              *ngIf="formsEmployeeDepartments.get('company.departments.projects.tasks.completed')?.invalid && formsEmployeeDepartments.get('company.departments.projects.tasks.completed')?.touched"
+              class="error">
+              Completed is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" [disabled]="formsEmployeeDepartments.invalid" class="submit-btn">Submit</button>
+</form>

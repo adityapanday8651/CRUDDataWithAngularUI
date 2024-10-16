@@ -6,6 +6,39 @@
 </button>
 <app-protected></app-protected>
 
+
+
+<div class="container">
+  <div id="printableArea">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of tableData">
+          <td>{{ row.id }}</td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.age }}</td>
+          <td>{{ row.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <button type="button" class="btn btn-primary" (click)="printTable()">Print Table</button>
+  
+</div>
+
+
+
+
+
+
 <div class="container mt-5">
   <form [formGroup]="auditReportForm" (ngSubmit)="onSubmit()" class="bg-light p-4 rounded shadow-lg">
     <h2 class="mb-4 text-center">Audit Report Form</h2>

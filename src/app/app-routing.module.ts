@@ -10,6 +10,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { MedicineComponent } from './components/medicine/medicine.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { AddressComponent } from './components/address/address.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,6 +26,9 @@ const routes: Routes = [
   { path: 'main-content', component: MainContentComponent, canActivate: [AuthGuard] },
   { path: 'sidebar', component: SidebarComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
+  { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
+  { path: 'address', component: AddressComponent, canActivate: [AuthGuard] },
+  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
 ];
 
 

@@ -1,35 +1,111 @@
-/* Container for the navigation links */
-mat-nav-list {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    background-color: #ffffff; /* Change to your preferred background color */
+/* General Form Container */
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 1.5rem;
+  color: #495057;
+  border-bottom: 2px solid #007bff;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Error Messages */
+.error {
+  font-size: 0.9rem;
+  color: #dc3545;
+  margin-top: 5px;
+}
+
+/* Submit Button */
+.submit-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.submit-btn:not(:disabled):hover {
+  background-color: #0056b3;
+}
+
+/* Section Styling */
+.section {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.section .section-title {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+/* Form Group Styling */
+.form-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .form-group {
+    grid-template-columns: 1fr 1fr;
   }
-  
-  /* Style for each list item */
-  mat-list-item {
-    width: 100%;
-    padding: 15px 20px;
-    box-sizing: border-box;
+
+  .section-title {
+    font-size: 1.75rem;
   }
-  
-  /* Style for the links */
-  mat-list-item a {
-    text-decoration: none;
-    color: #333333; /* Change to your preferred text color */
-    display: block;
-    width: 100%;
-    height: 100%;
+
+  .submit-btn {
+    font-size: 1.5rem;
   }
-  
-  /* Change the color on hover */
-  mat-list-item a:hover {
-    background-color: #f0f0f0; /* Change to your preferred hover background color */
-  }
-  
-  /* Selected link style */
-  mat-list-item a.router-link-active {
-    background-color: #e0e0e0; /* Change to your preferred active link background color */
-    font-weight: bold;
-  }
-  
+}

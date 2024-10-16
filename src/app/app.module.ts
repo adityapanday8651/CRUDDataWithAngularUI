@@ -20,6 +20,13 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { MedicineComponent } from './components/medicine/medicine.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AddressComponent } from './components/address/address.component';
+import { CompanyComponent } from './components/company/company.component';
+import { DepartmentsComponent } from './components/departments/departments.component';
+import { EmployeesComponent } from './components/employees/employees.component';
+import { ManagerComponent } from './components/manager/manager.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { TasksComponent } from './components/tasks/tasks.component';
 
 
 export function tokenGetter() {
@@ -41,6 +48,13 @@ export function tokenGetter() {
     SidebarComponent,
     MainContentComponent,
     MedicineComponent,
+    AddressComponent,
+    CompanyComponent,
+    DepartmentsComponent,
+    EmployeesComponent,
+    ManagerComponent,
+    ProjectsComponent,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,

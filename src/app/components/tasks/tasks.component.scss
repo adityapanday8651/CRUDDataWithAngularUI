@@ -1,0 +1,71 @@
+body {
+    font-family: 'Roboto', sans-serif;
+  }
+  .table {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6; /* Add border to table */
+  }
+  .table thead th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+  .table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  .btn {
+    margin-right: 0.5em;
+  }
+  .btn i {
+    margin-right: 0.3em;
+  }
+  .btn.fafaIconColor {
+    background-color: #007bff;
+    color: #ffffff;
+  }
+  .btn.fafaIconColor:hover {
+    background-color: #0056b3;
+  }
+  
+  
+  .no-products-message {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #333;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+    margin-top: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  .addMarginButton {
+    margin-left: 31rem;
+  }
+  
+  .no-products-message i {
+    font-size: 50px;
+    color: #f44336; /* Red color for the icon */
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .no-products-message p {
+    margin: 0;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    color: #555;
+  }
+  
+  .no-products-message::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    z-index: -1;
+  }

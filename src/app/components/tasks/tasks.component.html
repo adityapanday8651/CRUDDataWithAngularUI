@@ -1,0 +1,140 @@
+<body>
+  <div class="container mt-5">
+    <div class="row align-items-center">
+      <div class="col-12 col-md-8">
+        <strong>Category Table</strong>
+        <div *ngIf="lstAllTasks && lstAllTasks.length > 0; else nolstAllTasks">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Task Name</th>
+                <th scope="col">Dead Line</th>
+                <th scope="col">Completed</th>
+                <th scope="col">IsActive</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of lstAllTasks">
+                <td>{{task.taskName}}</td>
+                <td>{{task.deadline}}</td>
+                <td>{{task.completed}}</td>
+                <td>{{task.isActive}}</td>
+                <td>
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editTaskModal"
+                    title="Edit" (click)="editOpen(task.taskId)">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+                  <!-- <button type="button" class="btn btn-danger" title="Delete" (click)="deleteCategoryAsync(category.id)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button> -->
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #nolstAllTasks>
+        <div class="no-products-message">
+          <i class="fas fa-exclamation-circle" title="Category is not available or User Unuthorized"></i>
+          <p>No Category available.</p>
+        </div>
+      </ng-template>
+    </div>
+    <div class="addMarginButton">
+      <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addTaskModal" title="Add"
+        (click)="open()">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+  </div>
+</body>
+
+
+<div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTaskModalLabel">Add Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="tasksForm">
+          <div class="mb-3">
+            <label for="taskName" class="form-label">Task Name</label>
+            <input type="text" class="form-control" id="taskName" formControlName="taskName"
+              [ngClass]="{'is-invalid': isTaskNameInvalid()}">
+            <div *ngIf="isTaskNameInvalid()" class="text-danger">
+              <div *ngIf="taskName.errors?.required">Task name is required.</div>
+              <div *ngIf="taskName.errors?.minlength">Task name must be at least 3 characters long.</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="deadline" class="form-label">Deadline</label>
+            <input type="date" class="form-control" id="deadline" formControlName="deadline"
+              [ngClass]="{'is-invalid': isDeadlineInvalid()}">
+            <div *ngIf="isDeadlineInvalid()" class="text-danger">
+              <div *ngIf="deadline.errors?.required">Deadline is required.</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="completed" formControlName="completed">
+              <label class="form-check-label" for="completed">Completed</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!tasksForm.valid" (click)="addTasksAsync()">Add
+            Task</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editTaskModalLabel">Edit Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="tasksForm">
+          <div class="mb-3">
+            <label for="taskName" class="form-label">Task Name</label>
+            <input type="text" class="form-control" id="taskName" formControlName="taskName"
+              [ngClass]="{'is-invalid': isTaskNameInvalid()}">
+            <div *ngIf="isTaskNameInvalid()" class="text-danger">
+              <div *ngIf="taskName.errors?.required">Task name is required.</div>
+              <div *ngIf="taskName.errors?.minlength">Task name must be at least 3 characters long.</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="deadline" class="form-label">Deadline</label>
+            <input type="date" class="form-control" id="deadline" formControlName="deadline"
+              [ngClass]="{'is-invalid': isDeadlineInvalid()}">
+            <div *ngIf="isDeadlineInvalid()" class="text-danger">
+              <div *ngIf="deadline.errors?.required">Deadline is required.</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="completed" formControlName="completed">
+              <label class="form-check-label" for="completed">Completed</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!tasksForm.valid"
+            (click)="updateTasksAsync()">Update Task</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

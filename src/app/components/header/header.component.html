@@ -1,35 +1,47 @@
 <nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container-fluid">
-    <a class="navbar-brand">Aditya Collections</a>
+    <a class="navbar-brand"><i class="fas fa-store"></i> Aditya Collections</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+          <a class="nav-link" routerLink="/home" routerLinkActive="active"><i class="fas fa-home"></i> Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/product" routerLinkActive="active">Product</a>
+          <a class="nav-link" routerLink="/product" routerLinkActive="active"><i class="fas fa-box"></i> Product</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/category" routerLinkActive="active">Category</a>
+          <a class="nav-link" routerLink="/category" routerLinkActive="active"><i class="fas fa-th-list"></i> Category</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/medicine" routerLinkActive="active">Medicine</a>
+          <a class="nav-link" routerLink="/medicine" routerLinkActive="active"><i class="fas fa-pills"></i> Medicine</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active"><i class="fas fa-user"></i> Profile</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-shield"></i> Projects & Tasks Pages
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+            <li><a class="dropdown-item" routerLink="/tasks"><i class="fas fa-tasks"></i> Tasks</a></li>
+            <li><a class="dropdown-item" routerLink="/projects"><i class="fas fa-glasses"></i> Projects</a></li>
+            <li><a class="dropdown-item" routerLink="/address"><i class="fas fa-map-marker-alt"></i> Address</a></li>
+           
+          </ul>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" *ngIf="authService.isAuthenticated()">
-          <button class="btn btn-outline-light btn-logout" (click)="onLogout()">Logout</button>
+          <button class="btn btn-outline-light btn-logout" (click)="onLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </li>
         <li class="nav-item" *ngIf="!authService.isAuthenticated()">
-          <a class="btn btn-outline-light btn-login" routerLink="/login">Login</a>
+          <a class="btn btn-outline-light btn-login" routerLink="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+

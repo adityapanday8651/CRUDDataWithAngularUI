@@ -10,6 +10,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class MainContentComponent implements OnInit {
   auditReportForm: FormGroup | any;
 
+  tableData = [
+    { id: 1, name: 'John Doe', age: 25, email: 'john@example.com' },
+    { id: 2, name: 'Jane Smith', age: 30, email: 'jane@example.com' },
+    { id: 3, name: 'Bob Johnson', age: 35, email: 'bob@example.com' }
+  ];
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService,
@@ -64,10 +69,9 @@ export class MainContentComponent implements OnInit {
 
   onSubmit() {
     if (this.auditReportForm.valid) {
-      console.log(this.auditReportForm.value);
     } else {
       this.auditReportForm.markAllAsTouched();
-      console.log('Form is invalid');
+
     }
   }
 
@@ -84,5 +88,40 @@ export class MainContentComponent implements OnInit {
     setTimeout(() => {
       this.spinner.hide();
     }, 500);
+  }
+
+
+  printTable() {
+    const printContent = document.getElementById('printableArea')?.innerHTML;
+    const windowUrl = 'about:blank';
+    const printWindow = window.open(windowUrl, '_blank', 'width=600,height=400');
+    printWindow?.document.write(`
+      <html>
+        <head>
+          <title>Print Table</title>
+          <style>
+            table {
+              width: 100%;
+              border-collapse: collapse;
+            }
+            th, td {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+            th {
+              background-color: #f2f2f2;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Printable Table</h1>
+          <div>${printContent}</div>
+        </body>
+      </html>
+    `);
+    printWindow?.document.close();
+    printWindow?.focus();
+    printWindow?.print();
+    printWindow?.close();
   }
 }

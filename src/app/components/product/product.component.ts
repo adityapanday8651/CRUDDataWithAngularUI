@@ -80,7 +80,6 @@ export class ProductComponent implements OnInit {
 
   public async addProductAsync() {
     if (this.productForm.valid) {
-      console.log(" addProductAsync Models : ", this.productForm.value);
       await this.productService.addProductAsync(this.productForm.value).subscribe(response => {
         this.notificationService.showSuccess(response.message);
       },
@@ -92,7 +91,6 @@ export class ProductComponent implements OnInit {
   }
   public async updateProductAsync() {
     if (this.productForm.valid) {
-      console.log("productForm Data :Update : ", this.productForm.value)
       await this.productService.updateProductAsync(this.productForm.value.id, this.productForm.value).subscribe((response => {
         this.notificationService.showSuccess(response.message);
       }))

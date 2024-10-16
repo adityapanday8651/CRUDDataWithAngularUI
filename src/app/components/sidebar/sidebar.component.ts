@@ -13,7 +13,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
 
     this.reactiveFormsEmployeeDepartments();
-    console.log("reactiveFormsEmployeeDepartments Values : ", this.formsEmployeeDepartments.value);
   }
   public reactiveFormsEmployeeDepartments() {
     this.formsEmployeeDepartments = this.formBuilder.group({
@@ -50,11 +49,17 @@ export class SidebarComponent implements OnInit {
               taskId: [401, Validators.required],
               taskName: ['Model Training', Validators.required],
               deadline: ['2024-10-01', Validators.required],
-              completed: false
+              completed: [false]
             })
           })
         })
       })
     })
+  }
+
+  onSubmit() {
+    if (this.formsEmployeeDepartments.valid) {
+      console.log("formsEmployeeDepartments Data : ",this.formsEmployeeDepartments.value);
+    }
   }
 }

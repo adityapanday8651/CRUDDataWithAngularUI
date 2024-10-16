@@ -1,0 +1,146 @@
+<p>projects works!</p>
+
+
+<body>
+    <div class="container mt-5">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-8">
+                <strong>Projects Table</strong>
+                <div *ngIf="getAllProjects && getAllProjects.length > 0; else nogetAllProjects">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Project Name</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Tasks Name</th>
+                                <th scope="col">IsActive</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let task of getAllProjects">
+                                <td>{{task.projectName}}</td>
+                                <td>{{task.status}}</td>
+                                <td>{{task.tasksName}}</td>
+                                <td>{{task.isActive}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editTaskModal" title="Edit" (click)="editOpen(task.taskId)">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <ng-template #nogetAllProjects>
+                <div class="no-products-message">
+                    <i class="fas fa-exclamation-circle" title="Category is not available or User Unuthorized"></i>
+                    <p>No Projects available.</p>
+                </div>
+            </ng-template>
+        </div>
+        <div class="addMarginButton">
+            <button type="button" class="btn fafaIconColor" data-bs-toggle="modal" data-bs-target="#addProjectModal"
+                title="Add" (click)="open()">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+<!-- Add Project Modal -->
+<div class="modal fade" id="addProjectModal" tabindex="-1" aria-labelledby="addProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addProjectModalLabel">Add Project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="projectsForm">
+            <div class="mb-3">
+              <label for="projectName" class="form-label">Project Name</label>
+              <input type="text" class="form-control" id="projectName" formControlName="projectName" [ngClass]="{'is-invalid': isProjectNameInvalid()}">
+              <div *ngIf="isProjectNameInvalid()" class="text-danger">
+                <div *ngIf="projectName.errors?.required">Project name is required.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <input type="text" class="form-control" id="status" formControlName="status" [ngClass]="{'is-invalid': isStatusInvalid()}">
+              <div *ngIf="isStatusInvalid()" class="text-danger">
+                <div *ngIf="status.errors?.required">Status is required.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="task" class="form-label">Tasks</label>
+              <select class="form-control" id="task" formControlName="tasksId">
+                <option *ngFor="let task of getAllTasks" [value]="task.taskId">{{ task.taskName }}</option>
+              </select>
+            </div>
+            <!-- <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="isActive" formControlName="isActive">
+              <label class="form-check-label" for="isActive">Is Active</label>
+            </div> -->
+            <button type="button" class="btn btn-primary" [disabled]="!projectsForm.valid" (click)="addProjectsAsync()">Add Project</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Edit Project Modal -->
+  <div class="modal fade" id="editProjectModal" tabindex="-1" aria-labelledby="editProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProjectModalLabel">Edit Project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="projectsForm">
+            <div class="mb-3">
+              <label for="projectName" class="form-label">Project Name</label>
+              <input type="text" class="form-control" id="projectName" formControlName="projectName" [ngClass]="{'is-invalid': isProjectNameInvalid()}">
+              <div *ngIf="isProjectNameInvalid()" class="text-danger">
+                <div *ngIf="projectName.errors?.required">Project name is required.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <input type="text" class="form-control" id="status" formControlName="status" [ngClass]="{'is-invalid': isStatusInvalid()}">
+              <div *ngIf="isStatusInvalid()" class="text-danger">
+                <div *ngIf="status.errors?.required">Status is required.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="tasksId" class="form-label">Tasks ID</label>
+              <input type="number" class="form-control" id="tasksId" formControlName="tasksId">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="isActive" formControlName="isActive">
+              <label class="form-check-label" for="isActive">Is Active</label>
+            </div>
+            <button type="button" class="btn btn-primary" [disabled]="!projectsForm.valid" (click)="updateProjectsAsync()">Update Project</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
